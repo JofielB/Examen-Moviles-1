@@ -1,6 +1,7 @@
 package com.example.eva1_examen_acredita_noacredita;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 
