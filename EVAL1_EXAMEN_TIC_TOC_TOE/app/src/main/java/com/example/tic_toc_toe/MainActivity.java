@@ -1,11 +1,9 @@
 package com.example.tic_toc_toe;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -251,15 +249,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 c9 = true;
                 validarMov();
+
             }
         });
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void validarMov() {
 
-        String tb1,tb2,tb3,tb4,tb5,tb6,tb7,tb8,tb9;
+        String tb1, tb2, tb3, tb4, tb5, tb6, tb7, tb8, tb9;
 
         boolean fin = false;
 
@@ -420,7 +418,6 @@ public class MainActivity extends AppCompatActivity {
                                         }
 
         if (fin) {
-
             //En caso de que uno de los jugadores gane primero, y el tablero no esta lleno
             // se desahabilita todos lo botones para evitar que sigan jugando
             b1.setEnabled(false);
@@ -433,26 +430,49 @@ public class MainActivity extends AppCompatActivity {
             b8.setEnabled(false);
             b9.setEnabled(false);
 
-            //Se habilita el boton reiniciar
+            //Se habilita el botón reiniciar
             btnReiniciar.setEnabled(true);
 
-            new AlertDialog.Builder(this)
-                    .setTitle("Fin del juego, Ha ganado" + "\" " + ganador + " \"")
-                    .setMessage("¿Volver a jugar?")
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            recreate();
-                        }
+            if (ganador.equals("O") | ganador.equals("X")) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Fin del juego, Ha ganado" + "\" " + ganador + " \"")
+                        .setMessage("¿Volver a jugar?")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                recreate();
+                            }
 
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            btnReiniciar.setEnabled(true);
-                        }
-                    })
-                    .show();
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                btnReiniciar.setEnabled(true);
+                            }
+                        })
+                        .show();
+            } else {
+                new AlertDialog.Builder(this)
+                        .setTitle("Fin del juego, Los jugadores han quedado en empate")
+                        .setMessage("¿Volver a jugar?")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                recreate();
+                            }
+
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                btnReiniciar.setEnabled(true);
+                            }
+                        })
+                        .show();
+            }
+
         }
     }
+
+
 }
